@@ -1,0 +1,58 @@
+{
+  "version":{
+    "author":"THU",
+    "date":"xxxx-xx-xx",
+    "nodeNum":4
+  },
+
+  "node":[
+    {
+      "startNode":"True",
+      "name": "firstadd",
+      "module": "add",
+      "input":{
+        "x1":"None",
+        "x2":"None"
+      },
+      "output": {
+        "y":0
+      }
+    },
+
+    {
+      "name":"secondadd",
+      "module":"add",
+      "input":{
+        "x1":"firstadd/y",
+        "x2":"firstadd/y"
+      },
+      "output": {
+        "y": 0
+      }
+    },
+
+    {
+      "name":"multiply",
+      "module":"multiply",
+      "input":{
+        "x1":"firstadd/y",
+        "x2":"secondadd/y"
+      },
+      "output": {
+        "y": 0
+      }
+    },
+
+    {
+      "name":"minus",
+      "module":"minus",
+      "input":{
+        "x1":"multiply/y",
+        "x2":"secondadd/y"
+      },
+      "output":{
+        "y":0
+      }
+    }
+  ]
+}
