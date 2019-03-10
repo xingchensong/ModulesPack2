@@ -48,7 +48,7 @@
       "module":"minus",
       "input":{
         "x1":"multiply/y",
-        "x2":"secondadd/y"
+        "x2": { "x2" : 8 }
       },
       "output":{
         "y":0

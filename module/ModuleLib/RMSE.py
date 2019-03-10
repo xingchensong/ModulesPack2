@@ -20,7 +20,7 @@ class RMSE(Module):
         x1 = inputs['x1']
         x2 = inputs['x2']
 
-        graph = ModuleGraph(JsonFile='D:\pycharm_proj\class_api\modules\ModuleLib\RMSE_graph.json')
+        graph = ModuleGraph(JsonFile='D:\pycharm_proj\modulespack2\module\ModuleLib\RMSE_graph.json')
         from session import Session
         sess = Session()
         feed_dic = {'firstadd': {'x1': x1, 'x2': x2}}

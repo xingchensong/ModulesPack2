@@ -183,11 +183,17 @@ class BaseSession(SessionInterface):
             else:
                 inputs = graph.node[node_name]['attr']['input']
                 for key,value in inputs.items():
-                    pre_node_name = value.split('/',1)[0]
-                    pre_output_name = value.split('/')[-1]
-                    CheckDesc(current_node_name=node_name, current_input_name=key,
-                              pre_node_name=pre_node_name, pre_output_name=pre_output_name)
-                    inputs[key] = ModuleTable[pre_node_name]['output'][pre_output_name]
+                    # The initial value that can be specified in graph.json
+                    if type(value).__name__ == 'dict':
+                        for inner_key,inner_value in value.items():
+                            inputs[inner_key] = inner_value
+                    # The initial value that must be obtained by running the previous node
+                    else:
+                        pre_node_name = value.split('/',1)[0]
+                        pre_output_name = value.split('/')[-1]
+                        CheckDesc(current_node_name=node_name, current_input_name=key,
+                                  pre_node_name=pre_node_name, pre_output_name=pre_output_name)
+                        inputs[key] = ModuleTable[pre_node_name]['output'][pre_output_name]
 
             # run node
             output = ModuleTable[node_name]['module_instance'].run(inputs)
@@ -202,14 +208,14 @@ class BaseSession(SessionInterface):
         return final_output
 
 
-    def __new__(cls, *args, **kwargs):
-        if (len(args) > 0 and isinstance(args[0], Config)) \
-                or 'config' in kwargs:
-            logger.logger.error("Use interface API to launch controller ,do not pass Config directly to a controller!")
-            import sys
-            sys.exit(1)
-        else:
-            return super(BaseSession, cls).__new__(cls)
+    # def __new__(cls, *args, **kwargs):
+    #     if (len(args) > 0 and isinstance(args[0], Config)) \
+    #             or 'config' in kwargs:
+    #         logger.logger.error("Use interface API to launch controller ,do not pass Config directly to a controller!")
+    #         import sys
+    #         sys.exit(1)
+    #     else:
+    #         return super(BaseSession, cls).__new__(cls)
 
 class Session(BaseSession):
 

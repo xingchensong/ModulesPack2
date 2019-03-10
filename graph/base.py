@@ -24,6 +24,8 @@ class ModuleGraph(nx.DiGraph):
             currentNodeName = graphdata['node'][i]['name']
             outerNodes = graphdata['node'][i]['input'].values()
             for node in outerNodes:
+                if type(node).__name__ == 'dict':
+                    continue
                 tempGraph.add_edge( node.split('/',1)[0] , currentNodeName
                                     , data=graphdata['node'][i]['input'] )
 
