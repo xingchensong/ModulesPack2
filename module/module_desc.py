@@ -126,19 +126,21 @@ class ModuleDesc(object):
         except AttributeError:
             logger.logger.info('Can\'t find OutputDesc')
 
-    @property
+
     def input_names(self):
         """
         Returns:
             [str]: the names of all the inputs.
         """
-        return self.inputDesc.keys()
+        ret = list(self.inputDesc.keys())
+        return ret
 
-    @property
+
     def output_names(self):
         """
         Returns:
             [str]: the names of all the outputs.
         """
-        return self.outputDesc.keys()
+        ret = list(self.outputDesc.keys())
+        return ret
 
