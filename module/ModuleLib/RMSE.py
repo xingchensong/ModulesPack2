@@ -22,7 +22,7 @@ class RMSE(Module):
 
         graph = ModuleGraph(JsonFile='D:\pycharm_proj\modulespack2\module\ModuleLib\RMSE_graph.json')
         from session import Session
-        sess = Session()
+        sess = Session(ModuleLibPath='D:\pycharm_proj\modulespack2\module\ModuleLib')
         feed_dic = {'firstadd': {'x1': x1, 'x2': x2}}
 
         ModuleTable, toposort = sess.build_graph(graph)

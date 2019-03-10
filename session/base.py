@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # File: base.py
 
-import six
+import sys,os
 from abc import abstractmethod, ABCMeta
 
 from module import (Module, Modules)
@@ -38,20 +38,22 @@ class BaseSession(SessionInterface):
       manages imperative information when running the graph.
     """
 
-    def __init__(self, config=None):
+    def __init__(self, ModuleLibPath=None):
         """Constructs a new TensorFlow session.
 
         Args:
-          config: (Optional) used to configure the session.
+          ModuleLibPath: (Optional) used to find defined modules.
 
         Raises:
           Stop: Or one of its subclasses if an error occurs while
             creating the session.
         """
 
-        if config is not None:
-            #TODO : 如何合理利用config信息进行配置，以及配置什么
-            pass
+        if ModuleLibPath is not None:
+            #TODO : 是否需要将ModuleLibPath封装成Config？
+            sys.path.append(ModuleLibPath)
+        else:
+            raise Stop('ModuleLibPath must be specified')
         super().__init__()
 
 
@@ -76,8 +78,11 @@ class BaseSession(SessionInterface):
         nodes = graph.nodes
         modules = []
         for node_name in nodes:
-            module_name = graph.node[node_name]['attr']['module']+'()'
-            modules.append(eval(module_name))
+            module_name = graph.node[node_name]['attr']['module']
+            # Dynamic import
+            p = __import__(module_name, globals(), locals(), level=0)
+            globals()[module_name] = p.__dict__[module_name]
+            modules.append(eval(module_name+'()'))
 
         # check type
         def _Check_Module( md):
@@ -219,8 +224,8 @@ class BaseSession(SessionInterface):
 
 class Session(BaseSession):
 
-    def __init__(self,config=None):
-        super().__init__(config)
+    def __init__(self,ModuleLibPath=None):
+        super().__init__(ModuleLibPath)
 
     @staticmethod
     def sess_id():
