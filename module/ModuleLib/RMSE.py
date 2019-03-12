@@ -1,7 +1,13 @@
 from module import Module,ModuleDesc,InputDesc,OutputDesc
 import numpy as np
-from graph import ModuleGraph
 from module.GraphLib import get_graph
+
+graph = get_graph('RMSE_graph')
+from session import Session
+sess = Session(ModuleLibPath='D:\pycharm_proj\modulespack2\module\ModuleLib')
+ModuleTable, toposort = sess.build_graph(graph)
+
+
 class RMSE(Module):
 
     def __init__(self):
@@ -21,12 +27,12 @@ class RMSE(Module):
         x2 = inputs['x2']
 
         # graph = ModuleGraph(JsonFile='D:\pycharm_proj\modulespack2\module\ModuleLib\RMSE_graph.json')
-        graph = get_graph('RMSE_graph')
-        from session import Session
-        sess = Session(ModuleLibPath='D:\pycharm_proj\modulespack2\module\ModuleLib')
-        feed_dic = {'firstadd': {'x1': x1, 'x2': x2}}
+        # graph = get_graph('RMSE_graph')
+        # from session import Session
+        # sess = Session(ModuleLibPath='D:\pycharm_proj\modulespack2\module\ModuleLib')
+        # ModuleTable, toposort = sess.build_graph(graph)
 
-        ModuleTable, toposort = sess.build_graph(graph)
+        feed_dic = {'firstadd': {'x1': x1, 'x2': x2}}
         result = sess.run(fetches=toposort, ModuleTable=ModuleTable
                           , graph=graph, feed_dict=feed_dic)
 
