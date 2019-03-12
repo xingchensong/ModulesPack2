@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # File: base.py
 
-import sys,os
+import sys,os,copy
 from abc import abstractmethod, ABCMeta
 
 from module import (Module, Modules)
@@ -186,7 +186,7 @@ class BaseSession(SessionInterface):
                     raise Stop('feed_dict must be a dict-like object')
                 inputs = feed_dict[node_name]
             else:
-                inputs = graph.node[node_name]['attr']['input']
+                inputs = copy.deepcopy(graph.node[node_name]['attr']['input'])
                 for key,value in inputs.items():
                     # The initial value that can be specified in test.json
                     if type(value).__name__ == 'dict':
