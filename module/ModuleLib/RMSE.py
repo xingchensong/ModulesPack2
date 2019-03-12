@@ -1,7 +1,7 @@
 from module import Module,ModuleDesc,InputDesc,OutputDesc
 import numpy as np
 from graph import ModuleGraph
-
+from module.GraphLib import get_graph
 class RMSE(Module):
 
     def __init__(self):
@@ -20,7 +20,8 @@ class RMSE(Module):
         x1 = inputs['x1']
         x2 = inputs['x2']
 
-        graph = ModuleGraph(JsonFile='D:\pycharm_proj\modulespack2\module\ModuleLib\RMSE_graph.json')
+        # graph = ModuleGraph(JsonFile='D:\pycharm_proj\modulespack2\module\ModuleLib\RMSE_graph.json')
+        graph = get_graph('RMSE_graph')
         from session import Session
         sess = Session(ModuleLibPath='D:\pycharm_proj\modulespack2\module\ModuleLib')
         feed_dic = {'firstadd': {'x1': x1, 'x2': x2}}

@@ -188,7 +188,7 @@ class BaseSession(SessionInterface):
             else:
                 inputs = graph.node[node_name]['attr']['input']
                 for key,value in inputs.items():
-                    # The initial value that can be specified in graph.json
+                    # The initial value that can be specified in test.json
                     if type(value).__name__ == 'dict':
                         for inner_key,inner_value in value.items():
                             inputs[inner_key] = inner_value
