@@ -28,7 +28,7 @@ modulespack2借鉴了tensorflow静态图的设计思想，子功能的**模块�
 
 ![静态图](https://img-blog.csdnimg.cn/20190315221020303.png)
 
-其对应的json文件定义在 module/GraphLib/文件夹下
+其对应的json文件定义在 module/GraphLib/RMSE_graph.json文件中
 
 session会首先调用build_graph函数得到该图的拓扑排序和每个节点的module实例，之后run函数就会根据拓扑排序结果顺序执行每个module
 
