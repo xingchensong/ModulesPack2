@@ -22,7 +22,7 @@ modulespack的设计来源于这样的需求：
                                 ,graph=graph,feed_dict=feed_dic)
 
 
-modulespack2借鉴了tensorflow静态图的设计思想，子功能的**模块化**相当于在计算图中**节点化**，为此，mp2定义了ModuleGraph类来描述节点的集合，同时定义了一种json文件来格式化描述节点与节点之间的数据流动关系。除此之外，mp2还定义了Session类来掌控静态图运行的全过程。
+modulespack2借鉴了tensorflow静态图的设计思想，子功能的**模块化**相当于在计算图中**节点化**，为此，mp2定义了 [ModuleGraph类](https://github.com/stephen-song/modulespack2/blob/master/graph/base.py#L7) 来描述节点的集合，同时定义了一种json文件来格式化描述节点与节点之间的数据流动关系。除此之外，mp2还定义了 [Session类](https://github.com/stephen-song/modulespack2/blob/master/session/base.py#L34) 来掌控静态图运行的全过程。
 
 以下面这张静态图为例：
 
