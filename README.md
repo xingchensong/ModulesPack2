@@ -1,5 +1,5 @@
 # modulespack2
-modulespack version2
+modulespack version2 (AKA mp2)
 
 This is a Framework-Plugin that helps your Web API implement modular calls.
 
