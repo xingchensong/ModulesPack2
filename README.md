@@ -30,7 +30,7 @@ modulespack2借鉴了tensorflow静态图的设计思想，子功能的**模块�
 
 其对应的json文件定义在 [module/GraphLib/RMSE_graph.json](https://github.com/stephen-song/modulespack2/blob/master/module/GraphLib/RMSE_graph.json) 文件中
 
-![静态图与对应的json描述](https://github.com/stephen-song/papers/blob/master/modulespack2.png)
+![静态图与对应的json描述](https://wx2.sinaimg.cn/large/007Dlym2gy1g199ydsbttj30zk0k0afa.jpg)
 
 > 在modulespack2例程里静态图的执行经历了四个过程：
 > 
@@ -41,11 +41,11 @@ modulespack2借鉴了tensorflow静态图的设计思想，子功能的**模块�
 
 其中session通过调用 [build_graph](https://github.com/stephen-song/modulespack2/blob/master/session/base.py#L61) 函数得到该图的拓扑排序和每个节点的module实例：
 
-![拓扑排序](https://github.com/stephen-song/papers/blob/master/topo.png)
+![拓扑排序](https://wx2.sinaimg.cn/large/007Dlym2gy1g199ydamqkj30zk0k00va.jpg)
 
 之后session调用 [run](https://github.com/stephen-song/modulespack2/blob/master/session/base.py#L130) 函数根据拓扑排序结果顺序执行每个module：
 
-![结果](https://github.com/stephen-song/papers/blob/master/result.png)
+![结果](https://wx3.sinaimg.cn/large/007Dlym2gy1g199ydjt7kj30zk0k0ah4.jpg)
 
 实例展示：
 使用django + modulespack2 搭建的Voice Conversion服务平台
